@@ -12,8 +12,8 @@
 <script>
     import search from './components/search.vue'
     import Analysis from './components/Analysis.vue'
-    // axios.defaults.baseURL = 'http://localhost:5000/api';
-    axios.defaults.baseURL = 'http://123.207.89.91:5000/api';
+     axios.defaults.baseURL = 'http://localhost:5000/api';
+//    axios.defaults.baseURL = 'http://123.207.89.91:5000/api';
     export default {
         components: {
             search,
@@ -29,9 +29,9 @@
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
   margin: 2em auto;
-  width: 50em; 
+  width: 50em;
   border: 1px solid #ccc;
-  padding: 1.5em; 
+  padding: 1.5em;
   background: white;
 }
 .tops {
