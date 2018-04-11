@@ -10,6 +10,10 @@ from flask import Flask, request, jsonify, Response
 from flask_restful import Api, Resource, reqparse
 from werkzeug.datastructures import Headers
 from conf.config import MongoDBConfig
+import schedule
+import time
+import threading
+
 
 app = Flask(__name__)
 client = MongoClient(MongoDBConfig.g_server_ip, MongoDBConfig.g_server_port)
@@ -146,10 +150,54 @@ class Analysis(Resource):
             return response_cors("use /api/analysis/[source, xtime, suffix_email] to get analysis data.", None, "error")
             #return jsonify({"status":"error", "response":"use /api/analysis/[source, xtime, suffix_email] to get analysis data."})
 
+
+def run_threaded(job_func):
+    job_thread = threading.Thread(target=job_func)
+    job_thread.start()
+
+
+def login():
+    pass
+
+class utilTool:
+    def getCheckCode(url):
+        pass
+
+
+
+
+class learn:
+    def learn(session):
+        learnCource(id)
+        pass
+
+    def learnCource(id):
+        pass
+
+
+
+def job(self):
+    session = login()
+    learn(session)
+
+    ##
+    downExam()
+
+
+
+
 class AllInOne(Resource):
     '''
-    分析功能
+    学习平台
+	考试课程，通过考试
+		准确率
+	下载题库
+	代理
+	学习课程，达到完成状态
+	自动选课，达到学时
+
     '''
+
     def post(self):
         data = request.get_json()
         userName = data.get('userName')
@@ -157,7 +205,12 @@ class AllInOne(Resource):
         if not userName or password:
             return response_cors("ok")
 
+        schedule.every(10).seconds.do(run_threaded, job)
         return response_cors("ok")
+
+
+
+
 
 
 # 添加api资源
