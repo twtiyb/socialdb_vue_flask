@@ -77,15 +77,15 @@ class Person(Resource):
 
         # elif xtime:
         #     persons_info = db.person.find({"xtime": {"$regex": xtime, "$options":"$i"}}, {"_id": 0}).limit(limitn).skip(skipn)
-            
+
         else:
             #限制只能查询10个
             persons_info = db.person.find({}, {"_id": 0, "update_time": 0}).limit(10)
- 
+
         for person in persons_info:
             data.append(person)
 
-        #判断有无数据返回 
+        #判断有无数据返回
         if data:
             return response_cors(data, datacnts, "ok")
         else:
@@ -145,7 +145,21 @@ class Analysis(Resource):
         else:
             return response_cors("use /api/analysis/[source, xtime, suffix_email] to get analysis data.", None, "error")
             #return jsonify({"status":"error", "response":"use /api/analysis/[source, xtime, suffix_email] to get analysis data."})
-        
+
+class AllInOne(Resource):
+    '''
+    分析功能
+    '''
+    def post(self):
+        data = request.get_json()
+        userName = data.get('userName')
+        password = data.get('password')
+        if not userName or password:
+            return response_cors("ok")
+
+        return response_cors("ok")
+
+
 # 添加api资源
 api = Api(app)
 api.add_resource(Person, "/api/find")
@@ -156,6 +170,7 @@ api.add_resource(Person, "/api/find/passwordHash/<string:passwordHash>", endpoin
 api.add_resource(Person, "/api/find/source/<string:source>", endpoint="source")
 api.add_resource(Person, "/api/find/time/<string:xtime>", endpoint="xtime")
 api.add_resource(Analysis, "/api/analysis/<string:type_analyze>", endpoint="type_analyze")
+api.add_resource(AllInOne, "/api/allInOne")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
