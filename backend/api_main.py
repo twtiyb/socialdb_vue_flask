@@ -151,40 +151,6 @@ class Analysis(Resource):
             #return jsonify({"status":"error", "response":"use /api/analysis/[source, xtime, suffix_email] to get analysis data."})
 
 
-def run_threaded(job_func):
-    job_thread = threading.Thread(target=job_func)
-    job_thread.start()
-
-
-def login():
-    pass
-
-class utilTool:
-    def getCheckCode(url):
-        pass
-
-
-
-
-class learn:
-    def learn(session):
-        learnCource(id)
-        pass
-
-    def learnCource(id):
-        pass
-
-
-
-def job(self):
-    session = login()
-    learn(session)
-
-    ##
-    downExam()
-
-
-
 
 class AllInOne(Resource):
     '''
